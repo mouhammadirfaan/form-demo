@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SureGuard — Insurance Callback</title>
+<style>
+  :root{
+    --txt:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e0; --line2:#cfcfcb;
+    --info:#185fa5; --info-bg:#e6f1fb; --bg:#ffffff; --surface:#f5f4ef;
+    --success:#0f6e56; --danger:#a32d2d;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--surface);color:var(--txt);line-height:1.5;padding:24px;}
+  .card{max-width:620px;margin:0 auto;background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:10px;}
+  .brand{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:var(--info);}
+  .brand svg{width:22px;height:22px;}
+  .links{display:flex;gap:18px;font-size:13px;}
+  .links a{color:var(--muted);text-decoration:none;}
+  .links a:hover{color:var(--info);}
+  .hero{padding:28px 20px 8px;}
+  h1{margin:0 0 4px;font-size:22px;font-weight:600;}
+  .lead{margin:0;font-size:14px;color:var(--muted);}
+  .prod-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 24px;}
+  .prod-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;
+    border:1px solid var(--line2);border-radius:12px;background:var(--bg);cursor:pointer;font:inherit;font-size:14px;color:var(--txt);}
+  .prod-btn:hover{background:var(--surface);}
+  .prod-btn.active{background:var(--info-bg);border-color:var(--info);color:var(--info);}
+  .prod-btn svg{width:24px;height:24px;}
+  .form-box{background:var(--surface);border-radius:12px;padding:18px 18px 6px;margin-bottom:22px;}
+  .form-box h2{margin:0 0 2px;font-size:16px;font-weight:600;}
+  .form-sub{margin:0 0 16px;font-size:12px;color:var(--muted);}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  input,select{width:100%;height:38px;padding:0 10px;border:1px solid var(--line2);border-radius:8px;
+    font:inherit;font-size:14px;background:var(--bg);color:var(--txt);}
+  input:focus,select:focus{outline:none;border-color:var(--info);box-shadow:0 0 0 3px var(--info-bg);}
+  .row2{display:flex;gap:12px;}
+  .row2>.field{flex:1;}
+  .submit{width:100%;height:42px;background:var(--info);color:#fff;border:none;border-radius:8px;
+    font:inherit;font-size:15px;font-weight:500;cursor:pointer;margin-bottom:14px;}
+  .submit:hover{opacity:.92;}
+  .status{margin:0 0 12px;font-size:13px;text-align:center;min-height:16px;}
+  @media(max-width:520px){.prod-row{grid-template-columns:repeat(2,1fr);}.row2{flex-direction:column;gap:0;}}
+</style>
+</head>
+<body>
+<div class="card">
+  <nav class="nav">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      SureGuard
+    </div>
+    <div class="links">
+      <a href="#">Claims</a>
+      <a href="#">Support</a>
+      <a href="#">Contact us</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Insurance made simple</h1>
+    <p class="lead">Pick a product and we'll call you back to set things up.</p>
+
+    <div class="prod-row" id="prodRow">
+      <button class="prod-btn active" data-prod="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</button>
+      <button class="prod-btn" data-prod="auto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l1.5-4.5A2 2 0 018.4 7h7.2a2 2 0 011.9 1.5L19 13"/><path d="M4 13h16v5H4z"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>Auto</button>
+      <button class="prod-btn" data-prod="sme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16l-1 11H5L4 9z"/><path d="M9 9V6a3 3 0 016 0v3"/></svg>SME</button>
+      <button class="prod-btn" data-prod="life">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21C7 17 4 13.5 4 9.5 4 7 6 5 8.5 5c1.6 0 3 .8 3.5 2 .5-1.2 1.9-2 3.5-2C18 5 20 7 20 9.5c0 4-3 7.5-8 11.5z"/></svg>Life</button>
+    </div>
+
+    <div class="form-box">
+      <h2 id="formTitle">Home insurance — request a callback</h2>
+      <p class="form-sub" id="formSub">Tell us about your property.</p>
+
+      <div class="row2">
+        <div class="field"><label>Full name</label><input type="text" id="f_name" placeholder="Alex Morgan"></div>
+        <div class="field"><label>Phone</label><input type="tel" id="f_phone" placeholder="+1 (555) 000-0000"></div>
+      </div>
+
+      <div id="dynFields"></div>
+
+      <div class="field">
+        <label>Best time to call</label>
+        <select id="f_time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select>
+      </div>
+
+      <button type="button" class="submit" id="submitBtn">Request callback</button>
+      <p class="status" id="status"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const forms = {
+    home: {
+      title:'Home insurance — request a callback', sub:'Tell us about your property.',
+      fields:`<div class="field"><label>Property type</label><select><option>Detached house</option><option>Condo</option><option>Townhouse</option><option>Tenant / renter</option></select></div>
+        <div class="row2"><div class="field"><label>Postal code</label><input type="text" placeholder="A1A 1A1"></div><div class="field"><label>Year built</label><input type="number" placeholder="2005"></div></div>`
+    },
+    auto: {
+      title:'Auto insurance — request a callback', sub:'A few details about your vehicle.',
+      fields:`<div class="row2"><div class="field"><label>Vehicle make</label><input type="text" placeholder="Toyota"></div><div class="field"><label>Model year</label><input type="number" placeholder="2021"></div></div>
+        <div class="field"><label>Primary use</label><select><option>Personal / commute</option><option>Business</option><option>Pleasure only</option></select></div>`
+    },
+    sme: {
+      title:'SME insurance — request a callback', sub:'About your business.',
+      fields:`<div class="field"><label>Business name</label><input type="text" placeholder="Acme Ltd."></div>
+        <div class="row2"><div class="field"><label>Industry</label><select><option>Retail</option><option>Hospitality</option><option>Trades</option><option>Professional services</option><option>Other</option></select></div><div class="field"><label>Employees</label><select><option>1–5</option><option>6–20</option><option>21–50</option><option>50+</option></select></div></div>`
+    },
+    life: {
+      title:'Life insurance — request a callback', sub:'Help us tailor your coverage.',
+      fields:`<div class="row2"><div class="field"><label>Date of birth</label><input type="date"></div><div class="field"><label>Coverage amount</label><select><option>$100k</option><option>$250k</option><option>$500k</option><option>$1M+</option></select></div></div>
+        <div class="field"><label>Smoker</label><select><option>No</option><option>Yes</option></select></div>`
+    }
+  };
+
+  const dyn = document.getElementById('dynFields');
+  const titleEl = document.getElementById('formTitle');
+  const subEl = document.getElementById('formSub');
+  const status = document.getElementById('status');
+  let current = 'home';
+
+  function render(prod){
+    current = prod;
+    const f = forms[prod];
+    titleEl.textContent = f.title;
+    subEl.textContent = f.sub;
+    dyn.innerHTML = f.fields;
+    status.textContent = '';
+    document.querySelectorAll('.prod-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.prod === prod);
+    });
+  }
+  document.querySelectorAll('.prod-btn').forEach(b=>{
+    b.addEventListener('click', ()=>render(b.dataset.prod));
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', ()=>{
+    const name = document.getElementById('f_name').value.trim();
+    const phone = document.getElementById('f_phone').value.trim();
+    if(!name || !phone){ status.style.color='var(--danger)'; status.textContent='Please enter your name and phone number.'; return; }
+    status.style.color='var(--success)'; status.textContent='Thanks '+name+" — we'll call you about "+current+' insurance soon.';
+  });
+
+  render('home');
+})();
+</script>
+</body>
+</html>
